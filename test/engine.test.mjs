@@ -1,0 +1,103 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  CalendarMissing,
+  addMonths,
+  calendars,
+  epo2025,
+  epoCalendars,
+  parseEventCode,
+  parseLocalDate,
+  rollClosure,
+  rules,
+  rulesFor,
+  startDay,
+} from '../src/index.ts';
+import { defineRule } from '../src/rule.ts';
+
+const day = parseLocalDate;
+
+test('parseLocalDate accepts real dates and refuses other text', () => {
+  assert.equal(day('2024-02-29'), '2024-02-29');
+  assert.throws(() => day('2025-02-29'), RangeError);
+  assert.throws(() => day('2025-2-1'), RangeError);
+  assert.throws(() => day('2025-02-01T00:00'), RangeError);
+});
+
+test('addMonths keeps the day number, or takes the last day of a shorter month (R.131(4))', () => {
+  assert.equal(addMonths(day('2025-01-31'), 1), '2025-02-28');
+  assert.equal(addMonths(day('2024-01-31'), 1), '2024-02-29');
+  assert.equal(addMonths(day('2025-11-30'), 4), '2026-03-30');
+  assert.equal(addMonths(day('2025-08-31'), 31), '2028-03-31');
+});
+
+test('startDay is the day after the event (R.131(2))', () => {
+  assert.equal(startDay(day('2025-12-31')), '2026-01-01');
+});
+
+test('rollClosure keeps an open day and rolls over weekends and closing days across the year end', () => {
+  assert.equal(rollClosure('EPO', day('2025-07-03'), epoCalendars), '2025-07-03');
+  assert.equal(rollClosure('EPO', day('2025-12-24'), epoCalendars), '2026-01-02');
+});
+
+test('rollClosure fails loud when the roll reaches a year without a calendar', () => {
+  assert.throws(
+    () => rollClosure('EPO', day('2026-12-24'), epoCalendars),
+    (error) => error instanceof CalendarMissing && error.office === 'EPO' && error.year === 2027,
+  );
+});
+
+test('calendars refuses two calendars for one year and a closed day of another year', () => {
+  assert.throws(() => calendars([epo2025, epo2025]), /two calendars for EPO:2025/);
+  const stray = { ...epo2025, year: 2024 };
+  assert.throws(() => calendars([stray]), /a day of another year/);
+});
+
+test('parseEventCode refuses a code without an office', () => {
+  assert.equal(parseEventCode('EPO:R71(3)'), 'EPO:R71(3)');
+  assert.throws(() => parseEventCode('R71(3)'), RangeError);
+});
+
+test('rulesFor gives the rule versions that an event triggers, and none for an unknown event', () => {
+  assert.deepEqual(rulesFor(parseEventCode('EPO:R71(3)')).map((rule) => `${rule.id} v${rule.version}`), [
+    'ep.r71-3.grant-communication v1',
+  ]);
+  assert.deepEqual(rulesFor(parseEventCode('EPO:R161(1)')), []);
+});
+
+test('no rule version has an attorney sign-off yet', () => {
+  assert.deepEqual(
+    rules.map((rule) => rule.reviewedBy),
+    rules.map(() => null),
+  );
+});
+
+const event = parseEventCode('TEST:E');
+const window = {
+  id: 'test.window',
+  version: 1,
+  office: 'EPO',
+  trigger: [event],
+  effectiveFrom: day('2025-01-01'),
+  effectiveTo: day('2025-12-31'),
+  reviewedBy: null,
+  legalSource: [],
+  due: ({ documentDate }) => ({ due: documentDate, trace: [], notes: [], remedies: [] }),
+};
+
+test('a rule with an end date refuses document dates after it', () => {
+  const rule = defineRule(window);
+  const at = (date) => rule.compute({ event, documentDate: day(date), receivedAt: null }, epoCalendars);
+  assert.equal(at('2025-12-31').ok, true);
+  assert.equal(at('2026-01-01').error, 'rule-not-effective');
+});
+
+test('a rule passes on an error that is not a missing calendar', () => {
+  const rule = defineRule({
+    ...window,
+    due: () => {
+      throw new TypeError('defect in the rule');
+    },
+  });
+  assert.throws(() => rule.compute({ event, documentDate: day('2025-06-01'), receivedAt: null }, epoCalendars), TypeError);
+});
