@@ -1,5 +1,5 @@
 import { closureRollStep } from '../calendars.ts';
-import { addMonths, daysBetween, parseLocalDate, startDay } from '../date.ts';
+import { addDays, addMonths, daysBetween, parseLocalDate, startDay } from '../date.ts';
 import { defineRule, parseEventCode } from '../rule.ts';
 import type { Note, RuleId, TraceStep } from '../types.ts';
 
@@ -21,8 +21,10 @@ export const epR71_3GrantCommunicationV1 = defineRule({
   legalSource: [
     { cite: 'Rule 71 EPC', url: 'https://www.epo.org/en/legal/epc/2020/r71.html' },
     { cite: 'Rule 126 EPC', url: 'https://www.epo.org/en/legal/epc/2020/r126.html' },
+    { cite: 'Rule 127 EPC', url: 'https://www.epo.org/en/legal/epc/2020/r127.html' },
     { cite: 'Rule 131 EPC', url: 'https://www.epo.org/en/legal/epc/2020/r131.html' },
     { cite: 'Rule 134 EPC', url: 'https://www.epo.org/en/legal/epc/2020/r134.html' },
+    { cite: 'OJ EPO 2022, A101', url: 'https://www.epo.org/en/legal/official-journal/2022/11/a101' },
     { cite: 'OJ EPO 2023, A29', url: 'https://www.epo.org/en/legal/official-journal/2023/03/a29' },
   ],
   due({ documentDate, receivedAt }, calendars) {
@@ -30,7 +32,7 @@ export const epR71_3GrantCommunicationV1 = defineRule({
     const monthEnd = expiry.slice(8) !== documentDate.slice(8);
     const roll = closureRollStep('EPO', expiry, calendars);
     const trace: TraceStep[] = [
-      { op: 'delivery', from: documentDate, to: documentDate, cite: 'Rule 126(2) EPC; OJ EPO 2023, A29' },
+      { op: 'delivery', from: documentDate, to: documentDate, cite: 'Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29' },
       { op: 'start', from: documentDate, to: startDay(documentDate), cite: 'Rule 131(2) EPC' },
       monthEnd
         ? { op: 'month-end', from: documentDate, to: expiry, cite: 'Rule 71(3) EPC; Rule 131(4) EPC, last day of the month' }
@@ -42,10 +44,14 @@ export const epR71_3GrantCommunicationV1 = defineRule({
     if (lateDays > DELIVERY_GRACE_DAYS) {
       notes.push({
         kind: 'late-receipt',
-        cite: 'Rule 126(2) EPC',
-        text: `The document reached the addressee on ${receivedAt}, ${lateDays} days after the date it bears. If the EPO establishes this, the period ends ${lateDays - DELIVERY_GRACE_DAYS} days later, and Rule 134(1) EPC then applies to that later day. The due date does not include this extension.`,
+        cite: 'Rule 126(2) EPC; Rule 127(2) EPC',
+        text: `The document reached the addressee on ${receivedAt}, ${lateDays} days after the date it bears. If the EPO establishes this, the period ends ${days(lateDays - DELIVERY_GRACE_DAYS)} after ${expiry}, on ${addDays(expiry, lateDays - DELIVERY_GRACE_DAYS)}, and Rule 134(1) EPC then applies to that day. The due date does not include this extension.`,
       });
     }
     return { due: roll.to, trace, notes, remedies: [] };
   },
 });
+
+function days(count: number): string {
+  return count === 1 ? '1 day' : `${count} days`;
+}

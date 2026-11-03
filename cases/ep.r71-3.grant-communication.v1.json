@@ -17,7 +17,7 @@
             "op": "delivery",
             "from": "2025-09-30",
             "to": "2025-09-30",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -57,7 +57,7 @@
             "op": "delivery",
             "from": "2025-10-30",
             "to": "2025-10-30",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -97,7 +97,7 @@
             "op": "delivery",
             "from": "2025-10-31",
             "to": "2025-10-31",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -137,7 +137,7 @@
             "op": "delivery",
             "from": "2025-12-31",
             "to": "2025-12-31",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -177,7 +177,7 @@
             "op": "delivery",
             "from": "2025-06-11",
             "to": "2025-06-11",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -217,7 +217,7 @@
             "op": "delivery",
             "from": "2025-01-29",
             "to": "2025-01-29",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -257,7 +257,7 @@
             "op": "delivery",
             "from": "2025-08-24",
             "to": "2025-08-24",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -297,7 +297,7 @@
             "op": "delivery",
             "from": "2025-09-01",
             "to": "2025-09-01",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -337,7 +337,7 @@
             "op": "delivery",
             "from": "2025-03-03",
             "to": "2025-03-03",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -361,8 +361,8 @@
         "notes": [
           {
             "kind": "late-receipt",
-            "cite": "Rule 126(2) EPC",
-            "text": "The document reached the addressee on 2025-03-14, 11 days after the date it bears. If the EPO establishes this, the period ends 4 days later, and Rule 134(1) EPC then applies to that later day. The due date does not include this extension."
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC",
+            "text": "The document reached the addressee on 2025-03-14, 11 days after the date it bears. If the EPO establishes this, the period ends 4 days after 2025-07-03, on 2025-07-07, and Rule 134(1) EPC then applies to that day. The due date does not include this extension."
           }
         ],
         "remedies": []
@@ -383,7 +383,7 @@
             "op": "delivery",
             "from": "2025-03-03",
             "to": "2025-03-03",
-            "cite": "Rule 126(2) EPC; OJ EPO 2023, A29"
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
           },
           {
             "op": "start",
@@ -436,6 +436,868 @@
       "name": "event that does not trigger the rule",
       "input": {
         "event": "EPO:R161(1)",
+        "documentDate": "2025-03-03",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "unknown-event"
+      }
+    },
+    {
+      "name": "document date on a closed day (Ascension Day 2025) does not move the start",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-05-29",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-09-29",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-05-29",
+            "to": "2025-05-29",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-05-29",
+            "to": "2025-05-30",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-05-29",
+            "to": "2025-09-29",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-09-29",
+            "to": "2025-09-29",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "document date on Christmas Day 2025; Saturday, Sunday and King's Day (The Hague only) 2026 move the date to Tuesday",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-12-25",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-04-28",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-12-25",
+            "to": "2025-12-25",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-12-25",
+            "to": "2025-12-26",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-12-25",
+            "to": "2026-04-25",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-04-25",
+            "to": "2026-04-28",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "run of closed days: Good Friday, Saturday, Sunday and Easter Monday 2025",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2024-12-18",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-04-22",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2024-12-18",
+            "to": "2024-12-18",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2024-12-18",
+            "to": "2024-12-19",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2024-12-18",
+            "to": "2025-04-18",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-04-18",
+            "to": "2025-04-22",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "run of closed days: Good Friday, Saturday, Sunday and Easter Monday 2026",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-12-03",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-04-07",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-12-03",
+            "to": "2025-12-03",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-12-03",
+            "to": "2025-12-04",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-12-03",
+            "to": "2026-04-03",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-04-03",
+            "to": "2026-04-07",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Liberation Day 2025 closes only The Hague and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-01-05",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-05-06",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-01-05",
+            "to": "2025-01-05",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-01-05",
+            "to": "2025-01-06",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-01-05",
+            "to": "2025-05-05",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-05-05",
+            "to": "2025-05-06",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Corpus Christi 2026 closes only Munich and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-02-04",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-06-05",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-02-04",
+            "to": "2026-02-04",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-02-04",
+            "to": "2026-02-05",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-02-04",
+            "to": "2026-06-04",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-06-04",
+            "to": "2026-06-05",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Epiphany 2026 closes only Munich and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-09-06",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-01-07",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-09-06",
+            "to": "2025-09-06",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-09-06",
+            "to": "2025-09-07",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-09-06",
+            "to": "2026-01-06",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-01-06",
+            "to": "2026-01-07",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Day of German Unity 2025 closes Munich and Berlin, then the weekend",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-06-03",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-10-06",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-06-03",
+            "to": "2025-06-03",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-06-03",
+            "to": "2025-06-04",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-06-03",
+            "to": "2025-10-03",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-10-03",
+            "to": "2025-10-06",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "1 January 2025 is closed and ends a period of 2024",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2024-09-01",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-01-02",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2024-09-01",
+            "to": "2024-09-01",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2024-09-01",
+            "to": "2024-09-02",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2024-09-01",
+            "to": "2025-01-01",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-01-01",
+            "to": "2025-01-02",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "month end: 29 October 2025 has no 29 February 2026, a Saturday",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-10-29",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-03-02",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-10-29",
+            "to": "2025-10-29",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-10-29",
+            "to": "2025-10-30",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "month-end",
+            "from": "2025-10-29",
+            "to": "2026-02-28",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC, last day of the month"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-02-28",
+            "to": "2026-03-02",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "day 31 that the later month has: 31 January 2026 to 31 May 2026, a Sunday",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-01-31",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-06-01",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-01-31",
+            "to": "2026-01-31",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-01-31",
+            "to": "2026-02-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-01-31",
+            "to": "2026-05-31",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-05-31",
+            "to": "2026-06-01",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "day 30 that the later month has: 30 November 2025 to 30 March 2026",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-11-30",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-03-30",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-11-30",
+            "to": "2025-11-30",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-11-30",
+            "to": "2025-12-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-11-30",
+            "to": "2026-03-30",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-03-30",
+            "to": "2026-03-30",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "day 30 to 30 August 2026, a Sunday",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-04-30",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-08-31",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-04-30",
+            "to": "2026-04-30",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-04-30",
+            "to": "2026-05-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-04-30",
+            "to": "2026-08-30",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-08-30",
+            "to": "2026-08-31",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "31 August 2025 to 31 December 2025, inside the closure, rolls into 2026",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-08-31",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-01-02",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-08-31",
+            "to": "2025-08-31",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-08-31",
+            "to": "2025-09-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-08-31",
+            "to": "2025-12-31",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-12-31",
+            "to": "2026-01-02",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "receipt eight days after the document date gives a note of one day",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-03-03",
+        "receivedAt": "2025-03-11"
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-07-03",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-03-03",
+            "to": "2025-03-03",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-03-03",
+            "to": "2025-03-04",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-03-03",
+            "to": "2025-07-03",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-07-03",
+            "to": "2025-07-03",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [
+          {
+            "kind": "late-receipt",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC",
+            "text": "The document reached the addressee on 2025-03-11, 8 days after the date it bears. If the EPO establishes this, the period ends 1 day after 2025-07-03, on 2025-07-04, and Rule 134(1) EPC then applies to that day. The due date does not include this extension."
+          }
+        ],
+        "remedies": []
+      }
+    },
+    {
+      "name": "late receipt when the four-month date is a Saturday: the extension counts from the Saturday, not from the Monday",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-06-11",
+        "receivedAt": "2025-06-23"
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-10-13",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-06-11",
+            "to": "2025-06-11",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-06-11",
+            "to": "2025-06-12",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-06-11",
+            "to": "2025-10-11",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-10-11",
+            "to": "2025-10-13",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [
+          {
+            "kind": "late-receipt",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC",
+            "text": "The document reached the addressee on 2025-06-23, 12 days after the date it bears. If the EPO establishes this, the period ends 5 days after 2025-10-11, on 2025-10-16, and Rule 134(1) EPC then applies to that day. The due date does not include this extension."
+          }
+        ],
+        "remedies": []
+      }
+    },
+    {
+      "name": "OJ EPO 2023, A29 example 1 moved to 2025: receipt 12 days after the date gives 5 days",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-11-13",
+        "receivedAt": "2025-11-25"
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-03-13",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-11-13",
+            "to": "2025-11-13",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-11-13",
+            "to": "2025-11-14",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-11-13",
+            "to": "2026-03-13",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-03-13",
+            "to": "2026-03-13",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [
+          {
+            "kind": "late-receipt",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC",
+            "text": "The document reached the addressee on 2025-11-25, 12 days after the date it bears. If the EPO establishes this, the period ends 5 days after 2026-03-13, on 2026-03-18, and Rule 134(1) EPC then applies to that day. The due date does not include this extension."
+          }
+        ],
+        "remedies": []
+      }
+    },
+    {
+      "name": "receipt before the document date changes nothing: the date it bears is the deemed receipt",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-03-03",
+        "receivedAt": "2025-02-28"
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-07-03",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-03-03",
+            "to": "2025-03-03",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-03-03",
+            "to": "2025-03-04",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-03-03",
+            "to": "2025-07-03",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-07-03",
+            "to": "2025-07-03",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "receipt on the document date gives no note",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2025-03-03",
+        "receivedAt": "2025-03-03"
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-07-03",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-03-03",
+            "to": "2025-03-03",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-03-03",
+            "to": "2025-03-04",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-03-03",
+            "to": "2025-07-03",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-07-03",
+            "to": "2025-07-03",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "first document date of the rule version needs the 2024 calendar, which is not loaded",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2023-11-01",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "due date in 2024, a year without a calendar",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2024-08-31",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "closure from 24 December 2026 continues into 2027, a year without a calendar",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-08-24",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "28 December 2026 is closed and the roll reaches 2027",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-08-28",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "due date in 2028, a year without a calendar",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-11-15",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "29 February 2028, month end of 31 October 2027, a year without a calendar",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-10-31",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "unknown office in the event code",
+      "input": {
+        "event": "XYZ:R71(3)",
         "documentDate": "2025-03-03",
         "receivedAt": null
       },

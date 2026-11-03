@@ -26,7 +26,7 @@ for (const rule of rulesFor(event)) {
 }
 ```
 
-Parse each external value at your boundary. `parseLocalDate` accepts only a real date written `YYYY-MM-DD`. `parseEventCode` accepts only `<OFFICE>:<code>`. Both throw `RangeError` for other text.
+Parse each external value at your boundary. `parseLocalDate` accepts only a real date written `YYYY-MM-DD`. `parseEventCode` accepts only `<OFFICE>:<code>`. Both throw `RangeError` for other text. `compute` parses its input again, because a JavaScript caller can pass a value that was never parsed, and refuses it with `invalid-input`.
 
 `rulesFor(event)` gives the rule versions that the event triggers. An empty list means that no rule knows the event code. Your service must refuse that event loudly. It must not record it without a deadline.
 
@@ -36,20 +36,20 @@ Parse each external value at your boundary. `parseLocalDate` accepts only a real
 
 A computation has one of two forms:
 
-- `{ ok: true, due, trace, notes, remedies }`. `due` is the last day of the period. `trace` lists the steps. `notes` lists facts that a person must check. `remedies` lists the rule ids of the remedies when the period is missed (empty in version 1).
+- `{ ok: true, due, trace, notes, remedies }`. `due` is the last day of the period. `trace` lists the steps. `notes` lists facts that a person must check. `remedies` lists the rule ids of the remedies when the period is missed. It is empty in version 1 because the library has no remedy rule yet. The law has a remedy: further processing under Article 121 EPC and Rule 135 EPC (Guidelines C-V, 3 and E-VIII, 2).
 - `{ ok: false, error, detail }`. The library computes no date. `detail` tells a person what is missing.
 
 Each trace step has `op`, `from`, `to` and `cite`:
 
 | `op` | Step | Source |
 |---|---|---|
-| `delivery` | The document is deemed delivered on the date it bears. | Rule 126(2) EPC; OJ EPO 2023, A29 |
+| `delivery` | The document is deemed delivered on the date it bears. Rule 126(2) EPC applies to notification by post and Rule 127(2) EPC to electronic notification; both have the same text. | Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29 |
 | `start` | The computation starts on the day after the delivery. | Rule 131(2) EPC |
 | `add-period` | The period ends in the later month on the day with the same number. | The rule of the period; Rule 131(4) EPC |
 | `month-end` | The later month has no day with that number, so the period ends on the last day of that month. This step replaces `add-period`. | The rule of the period; Rule 131(4) EPC |
 | `closure-roll` | A period that ends on a closed day ends on the next day on which all filing offices are open. `from` and `to` are the same when the day is open. The citation names each calendar that the step read. | Rule 134(1) EPC; the OJ notice of each calendar |
 
-The library computes the earliest safe date. When a law gives a later date that depends on a fact that the library cannot prove, the library gives a note and does not change the date. In version 1 this is the late receipt of Rule 126(2) EPC: when `receivedAt` is more than seven days after the document date, the note gives the number of extra days.
+The library computes the earliest safe date. When a law gives a later date that depends on a fact that the library cannot prove, the library gives a note and does not change the date. In version 1 this is the late receipt of Rule 126(2) and Rule 127(2) EPC: when `receivedAt` is more than seven days after the document date, the note gives the number of extra days and the later date before Rule 134(1) EPC. The extra days count from the four-month date, not from the due date after the closure roll. A `receivedAt` before the document date changes nothing: the date that the document bears is the deemed receipt (OJ EPO 2023, A29, section II).
 
 ## Fail loud
 
@@ -57,6 +57,7 @@ The library never guesses a date. It refuses with a named error:
 
 | Error | Cause |
 |---|---|
+| `invalid-input` | An input value is not a real date `YYYY-MM-DD`, not an event code `<OFFICE>:<code>`, or missing. `receivedAt` must be a date or `null`. |
 | `calendar-missing` | The computation needs a calendar year that is not loaded, for example a due date in 2027. |
 | `rule-not-effective` | The document date is before `effectiveFrom` or after `effectiveTo` of the rule version. |
 | `unknown-event` | The event code is not a trigger of the rule. |
@@ -67,9 +68,9 @@ The library never guesses a date. It refuses with a named error:
 
 | Rule | Version | Trigger | Period | Effective | Legal source |
 |---|---|---|---|---|---|
-| `ep.r71-3.grant-communication` | 1 | `EPO:R71(3)` | 4 months from the date the document bears, then Rule 134(1) | from 2023-11-01 | [R.71](https://www.epo.org/en/legal/epc/2020/r71.html), [R.126](https://www.epo.org/en/legal/epc/2020/r126.html), [R.131](https://www.epo.org/en/legal/epc/2020/r131.html), [R.134](https://www.epo.org/en/legal/epc/2020/r134.html), [OJ EPO 2023, A29](https://www.epo.org/en/legal/official-journal/2023/03/a29) |
+| `ep.r71-3.grant-communication` | 1 | `EPO:R71(3)` | 4 months from the date the document bears, then Rule 134(1) | from 2023-11-01 | [R.71](https://www.epo.org/en/legal/epc/2020/r71.html), [R.126](https://www.epo.org/en/legal/epc/2020/r126.html), [R.127](https://www.epo.org/en/legal/epc/2020/r127.html), [R.131](https://www.epo.org/en/legal/epc/2020/r131.html), [R.134](https://www.epo.org/en/legal/epc/2020/r134.html), [OJ EPO 2022, A101](https://www.epo.org/en/legal/official-journal/2022/11/a101), [OJ EPO 2023, A29](https://www.epo.org/en/legal/official-journal/2023/03/a29) |
 
-Version 1 starts on 1 November 2023 because the delivery rule of Rule 126(2) EPC changed on that day. Version 1 does not compute remedies, a disruption under Rule 134(2) EPC, or an extension under Rule 134(5) EPC.
+Version 1 starts on 1 November 2023 because the delivery rules of Rule 126(2) and Rule 127(2) EPC changed on that day. They apply to documents to be notified on or after that day (CA/D 10/22, Article 3, OJ EPO 2022, A101), and the date that the document bears decides (OJ EPO 2023, A29, section V). Version 1 does not compute remedies, a disruption under Rule 134(2) EPC, an extension under Rule 134(5) EPC, or an extension under the second sentence of Rule 134(1) EPC when the EPO's electronic filing services cannot receive documents. The EPO announces such an outage in a separate notice; a person must check for one.
 
 ## Calendars
 
@@ -101,8 +102,11 @@ The cases of `ep.r71-3.grant-communication` version 1:
 | Receipt 11 days after the document date | 2025-03-03 | 2025-07-03, with a late-receipt note |
 | Receipt 7 days after the document date | 2025-03-03 | 2025-07-03, no note |
 | Document date before 1 November 2023 | 2023-10-31 | `rule-not-effective` |
-| Due date in 2027 | 2026-09-15 | `calendar-missing` |
+| Due date in 2027 | 2026-09-15 | `invalid-input` | An input value is not a real date `YYYY-MM-DD`, not an event code `<OFFICE>:<code>`, or missing. `receivedAt` must be a date or `null`. |
+| `calendar-missing` |
 | Event `EPO:R161(1)` | 2025-03-03 | `unknown-event` |
+
+The file has more cases for closed document dates, runs of closed days, days on which only one filing office is closed, the month-end boundaries, the seven-day boundary of late receipt, receipt before the document date, and closures that continue into a year without a calendar. `test/oracle.test.mjs` compares the rule with an independent oracle for every document date from 2023-09-01 to 2027-03-31. `node scripts/mutation-check.mjs` applies likely bugs to `src/` one at a time and fails when the tests do not catch one.
 
 ## Add a rule version
 
@@ -130,7 +134,7 @@ npm test
 
 ## Sources
 
-The closing days and the legal citations come from the European Patent Office: the European Patent Convention, OJ EPO 2023, A29, OJ EPO 2024, A91, OJ EPO 2025, A40, and the EPO notice of 11 December 2025, all on [epo.org](https://www.epo.org). Source: European Patent Office.
+The closing days and the legal citations come from the European Patent Office: the European Patent Convention, OJ EPO 2022, A101, OJ EPO 2023, A29, OJ EPO 2024, A91, OJ EPO 2025, A40, and the EPO notice of 11 December 2025, all on [epo.org](https://www.epo.org). Source: European Patent Office.
 
 ## License
 

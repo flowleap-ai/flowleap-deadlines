@@ -31,7 +31,7 @@ export type Note = {
     readonly text: string;
     readonly cite: string;
 };
-export type ComputationError = 'calendar-missing' | 'unknown-event' | 'rule-not-effective';
+export type ComputationError = 'invalid-input' | 'calendar-missing' | 'unknown-event' | 'rule-not-effective';
 export type Computation = {
     readonly ok: true;
     readonly due: LocalDate;

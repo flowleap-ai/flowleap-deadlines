@@ -101,3 +101,28 @@ test('a rule passes on an error that is not a missing calendar', () => {
   });
   assert.throws(() => rule.compute({ event, documentDate: day('2025-06-01'), receivedAt: null }, epoCalendars), TypeError);
 });
+
+test('compute refuses input that a JavaScript caller did not parse, and never gives a date for it', () => {
+  const [rule] = rulesFor(parseEventCode('EPO:R71(3)'));
+  const refused = (input, field) => {
+    const computation = rule.compute(input, epoCalendars);
+    assert.equal(computation.ok, false, JSON.stringify(input));
+    assert.equal(computation.error, 'invalid-input', JSON.stringify(input));
+    assert.match(computation.detail, new RegExp(`^${field}: RangeError: `), JSON.stringify(input));
+  };
+  const ok = { event: 'EPO:R71(3)', documentDate: '2025-03-03', receivedAt: null };
+  assert.equal(rule.compute(ok, epoCalendars).due, '2025-07-03');
+  for (const documentDate of ['2026-02-30', '2025-02-29', '2025-9-1', '2025-03-03T00:00', '', ' 2025-03-03', undefined, null, 20250303]) {
+    refused({ ...ok, documentDate }, 'documentDate');
+  }
+  for (const receivedAt of ['2025-03-99', 'yesterday', '', undefined]) refused({ ...ok, receivedAt }, 'receivedAt');
+  for (const event of ['', 'R71(3)', 'epo:R71(3)', undefined]) refused({ ...ok, event }, 'event');
+  const { receivedAt: _, ...noReceivedAt } = ok;
+  refused(noReceivedAt, 'receivedAt');
+  const both = rule.compute({ ...ok, event: undefined, documentDate: '2026-02-30' }, epoCalendars);
+  assert.match(both.detail, /^event: .*; documentDate: /);
+});
+
+test('a calendar of an unknown office is missing, never empty', () => {
+  assert.throws(() => epoCalendars.calendar('USPTO', 2025), (error) => error instanceof CalendarMissing && error.office === 'USPTO');
+});
