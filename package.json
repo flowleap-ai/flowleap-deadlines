@@ -1,0 +1,40 @@
+{
+  "name": "flowleap-deadlines",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "FlowLeap deadlines: the pure rules engine that computes patent office deadlines with a trace of each step and its legal source.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test --experimental-test-coverage --test-coverage-include='src/**' --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 'test/*.test.mjs'"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "patent",
+    "deadline",
+    "epo",
+    "epc",
+    "docket",
+    "time-limits"
+  ],
+  "homepage": "https://github.com/flowleap-ai/flowleap-deadlines",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowleap-ai/flowleap-deadlines.git"
+  },
+  "author": "FlowLeap",
+  "license": "MIT"
+}
