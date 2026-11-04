@@ -32,7 +32,7 @@ export type TraceStep = {
 
 export type Note = { readonly kind: 'late-receipt'; readonly text: string; readonly cite: string };
 
-export type ComputationError = 'calendar-missing' | 'unknown-event' | 'rule-not-effective';
+export type ComputationError = 'invalid-input' | 'calendar-missing' | 'unknown-event' | 'rule-not-effective';
 
 export type Computation =
   | {

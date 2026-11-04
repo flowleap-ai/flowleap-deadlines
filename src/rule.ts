@@ -1,4 +1,5 @@
 import { CalendarMissing } from './calendars.ts';
+import { parseLocalDate } from './date.ts';
 import type { Calendars, Computation, ComputationError, EventCode, Rule, TriggerInput } from './types.ts';
 
 type Due = Omit<Extract<Computation, { ok: true }>, 'ok'>;
@@ -15,13 +16,16 @@ export function parseEventCode(value: string): EventCode {
 }
 
 /**
- * Makes a rule whose `compute` refuses an event that is not a trigger of the rule, a document date
- * outside the rule's effective range, and a due date that needs a calendar that is not loaded.
+ * Makes a rule whose `compute` refuses input that the parse functions refuse (a caller in JavaScript
+ * can pass any value), an event that is not a trigger of the rule, a document date outside the rule's
+ * effective range, and a due date that needs a calendar that is not loaded.
  */
 export function defineRule({ due, ...rule }: RuleDefinition): Rule {
   return {
     ...rule,
     compute(input, calendars) {
+      const invalid = invalidInput(input);
+      if (invalid !== null) return refuse('invalid-input', invalid);
       if (!rule.trigger.includes(input.event)) {
         return refuse('unknown-event', `${rule.id} v${rule.version} does not trigger on ${input.event}`);
       }
@@ -39,6 +43,24 @@ export function defineRule({ due, ...rule }: RuleDefinition): Rule {
       }
     },
   };
+}
+
+function invalidInput({ event, documentDate, receivedAt }: TriggerInput): string | null {
+  const problems = [
+    check('event', () => parseEventCode(event)),
+    check('documentDate', () => parseLocalDate(documentDate)),
+    check('receivedAt', () => receivedAt === null || parseLocalDate(receivedAt)),
+  ].filter((problem) => problem !== null);
+  return problems.length === 0 ? null : problems.join('; ');
+}
+
+function check(field: string, parse: () => unknown): string | null {
+  try {
+    parse();
+    return null;
+  } catch (error) {
+    return `${field}: ${String(error)}`;
+  }
 }
 
 function refuse(error: ComputationError, detail: string): Computation {
