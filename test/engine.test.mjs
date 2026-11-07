@@ -42,8 +42,8 @@ test('rollClosure keeps an open day and rolls over weekends and closing days acr
 
 test('rollClosure fails loud when the roll reaches a year without a calendar', () => {
   assert.throws(
-    () => rollClosure('EPO', day('2026-12-24'), epoCalendars),
-    (error) => error instanceof CalendarMissing && error.office === 'EPO' && error.year === 2027,
+    () => rollClosure('EPO', day('2027-12-24'), epoCalendars),
+    (error) => error instanceof CalendarMissing && error.office === 'EPO' && error.year === 2028,
   );
 });
 

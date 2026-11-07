@@ -9,8 +9,9 @@ const M = 'Munich';
 const H = 'The Hague';
 const B = 'Berlin';
 
-// OJ EPO 2024, A91 (2025) and OJ EPO 2025, A40 (2026): https://www.epo.org/en/legal/official-journal/2024/10/a91
-// and https://www.epo.org/en/legal/official-journal/2025/06/a40. Date, then the offices that are closed.
+// OJ EPO 2024, A91 (2025), OJ EPO 2025, A40 (2026) and OJ EPO 2026, A30 (2027):
+// https://www.epo.org/en/legal/official-journal/2024/10/a91, https://www.epo.org/en/legal/official-journal/2025/06/a40
+// and https://www.epo.org/en/legal/official-journal/2026/06/a30. Date, then the offices that are closed.
 const NOTICES = {
   2025: {
     cite: 'OJ EPO 2024, A91',
@@ -53,6 +54,28 @@ const NOTICES = {
       ['29.12.2026', M, H, B],
       ['30.12.2026', M, H, B],
       ['31.12.2026', M, H, B],
+    ],
+  },
+  2027: {
+    cite: 'OJ EPO 2026, A30',
+    days: [
+      ['01.01.2027', M, H, B],
+      ['06.01.2027', M],
+      ['08.03.2027', B],
+      ['26.03.2027', M, H, B],
+      ['29.03.2027', M, H, B],
+      ['27.04.2027', H],
+      ['05.05.2027', H],
+      ['06.05.2027', M, H, B],
+      ['17.05.2027', M, H, B],
+      ['27.05.2027', M],
+      ['01.11.2027', M],
+      ['24.12.2027', M, H, B],
+      ['27.12.2027', M, H, B],
+      ['28.12.2027', M, H, B],
+      ['29.12.2027', M, H, B],
+      ['30.12.2027', M, H, B],
+      ['31.12.2027', M, H, B],
     ],
   },
 };
@@ -131,7 +154,7 @@ test('the oracle weekday matches known weekdays', () => {
 });
 
 test('the shipped calendars list exactly the notice days of each year, all offices together', () => {
-  for (const year of [2025, 2026]) {
+  for (const year of [2025, 2026, 2027]) {
     const shipped = epoCalendars.calendar('EPO', year);
     assert.equal(shipped.source.cite, NOTICES[year].cite);
     const fromNotice = [...closedByNotice.keys()].filter((k) => k.startsWith(`${year}-`)).sort();
@@ -139,9 +162,9 @@ test('the shipped calendars list exactly the notice days of each year, all offic
   }
 });
 
-test('rollClosure agrees with the oracle on every day of 2025 and 2026', () => {
+test('rollClosure agrees with the oracle on every day of 2025, 2026 and 2027', () => {
   let checked = 0;
-  for (let day = parse('2025-01-01'); day.y < 2027; day = next(day)) {
+  for (let day = parse('2025-01-01'); day.y < 2028; day = next(day)) {
     const date = fmt(day);
     let expected = day;
     let missing = false;
@@ -155,12 +178,12 @@ test('rollClosure agrees with the oracle on every day of 2025 and 2026', () => {
     else assert.equal(rollClosure('EPO', parseLocalDate(date), epoCalendars), fmt(expected), date);
     checked++;
   }
-  assert.equal(checked, 730);
+  assert.equal(checked, 1095);
 });
 
-test('the engine agrees with the oracle for every document date from 2023-09-01 to 2027-03-31', () => {
+test('the engine agrees with the oracle for every document date from 2023-09-01 to 2027-12-31', () => {
   const counts = { due: 0, 'calendar-missing': 0, 'rule-not-effective': 0 };
-  for (let day = parse('2023-09-01'); fmt(day) <= '2027-03-31'; day = next(day)) {
+  for (let day = parse('2023-09-01'); fmt(day) <= '2027-12-31'; day = next(day)) {
     const documentDate = fmt(day);
     const expected = oracle(documentDate);
     const got = rule.compute({ event, documentDate: parseLocalDate(documentDate), receivedAt: null }, epoCalendars);
@@ -189,13 +212,13 @@ test('the engine agrees with the oracle for every document date from 2023-09-01 
     assert.deepEqual(got.notes, []);
     counts.due++;
   }
-  // Before 2023-11-01: 61 days. Due in 2025 or 2026: document dates 2024-09-01 to 2026-08-23. The rest
-  // ends in 2024, or rolls from 24 December 2026 into 2027.
-  assert.deepEqual(counts, { due: 722, 'calendar-missing': 525, 'rule-not-effective': 61 });
+  // Before 2023-11-01: 61 days. Due in 2025 to 2027: document dates 2024-09-01 to 2027-08-23. The rest
+  // ends in 2024 (305 days), or in 2028 or rolls from 24 December 2027 into 2028 (130 days).
+  assert.deepEqual(counts, { due: 1087, 'calendar-missing': 435, 'rule-not-effective': 61 });
 });
 
-test('a document date on the 28th to 31st of each month of 2025 and 2026 ends on that day or the last day of the month', () => {
-  for (const year of [2024, 2025, 2026]) {
+test('a document date on the 28th to 31st of each month of 2024 to 2027 ends on that day or the last day of the month', () => {
+  for (const year of [2024, 2025, 2026, 2027]) {
     for (let month = 1; month <= 12; month++) {
       for (const d of [28, 29, 30, 31]) {
         if (d > monthLength(year, month)) continue;
