@@ -421,15 +421,43 @@
       }
     },
     {
-      "name": "due date in 2027, a year without a calendar",
+      "name": "due date in 2027: 15 January 2027 is open",
       "input": {
         "event": "EPO:R71(3)",
         "documentDate": "2026-09-15",
         "receivedAt": null
       },
       "expect": {
-        "ok": false,
-        "error": "calendar-missing"
+        "ok": true,
+        "due": "2027-01-15",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-09-15",
+            "to": "2026-09-15",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-09-15",
+            "to": "2026-09-16",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-09-15",
+            "to": "2027-01-15",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-01-15",
+            "to": "2027-01-15",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
       }
     },
     {
@@ -1247,22 +1275,530 @@
       }
     },
     {
-      "name": "closure from 24 December 2026 continues into 2027, a year without a calendar",
+      "name": "closure from 24 December 2026 continues to 1 January 2027 and the weekend, then 4 January 2027",
       "input": {
         "event": "EPO:R71(3)",
         "documentDate": "2026-08-24",
         "receivedAt": null
       },
       "expect": {
-        "ok": false,
-        "error": "calendar-missing"
+        "ok": true,
+        "due": "2027-01-04",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-08-24",
+            "to": "2026-08-24",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-08-24",
+            "to": "2026-08-25",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-08-24",
+            "to": "2026-12-24",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-12-24",
+            "to": "2027-01-04",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
       }
     },
     {
-      "name": "28 December 2026 is closed and the roll reaches 2027",
+      "name": "28 December 2026 is closed and the roll ends on 4 January 2027",
       "input": {
         "event": "EPO:R71(3)",
         "documentDate": "2026-08-28",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-01-04",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-08-28",
+            "to": "2026-08-28",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-08-28",
+            "to": "2026-08-29",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-08-28",
+            "to": "2026-12-28",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-12-28",
+            "to": "2027-01-04",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "EP23771920: R71(3) of 29 September 2026 ends on 29 January 2027, an open Friday",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-09-29",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-01-29",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-09-29",
+            "to": "2026-09-29",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-09-29",
+            "to": "2026-09-30",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-09-29",
+            "to": "2027-01-29",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-01-29",
+            "to": "2027-01-29",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Epiphany 2027 closes only Munich and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-09-06",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-01-07",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-09-06",
+            "to": "2026-09-06",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-09-06",
+            "to": "2026-09-07",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-09-06",
+            "to": "2027-01-06",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-01-06",
+            "to": "2027-01-07",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "month end: 31 October 2026 has no 31 February 2027; 28 February 2027 is a Sunday",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-10-31",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-03-01",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-10-31",
+            "to": "2026-10-31",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-10-31",
+            "to": "2026-11-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "month-end",
+            "from": "2026-10-31",
+            "to": "2027-02-28",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC, last day of the month"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-02-28",
+            "to": "2027-03-01",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "International Women's Day 2027 closes only Berlin and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-11-08",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-03-09",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-11-08",
+            "to": "2026-11-08",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-11-08",
+            "to": "2026-11-09",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-11-08",
+            "to": "2027-03-08",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-03-08",
+            "to": "2027-03-09",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "run of closed days: Good Friday, Saturday, Sunday and Easter Monday 2027",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-11-26",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-03-30",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-11-26",
+            "to": "2026-11-26",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-11-26",
+            "to": "2026-11-27",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-11-26",
+            "to": "2027-03-26",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-03-26",
+            "to": "2027-03-30",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "King's Day 2027 closes only The Hague and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-12-27",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-04-28",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-12-27",
+            "to": "2026-12-27",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-12-27",
+            "to": "2026-12-28",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-12-27",
+            "to": "2027-04-27",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-04-27",
+            "to": "2027-04-28",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Liberation Day (The Hague only) and Ascension Day 2027 move the date two days",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-01-05",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-05-07",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2027-01-05",
+            "to": "2027-01-05",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2027-01-05",
+            "to": "2027-01-06",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2027-01-05",
+            "to": "2027-05-05",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-05-05",
+            "to": "2027-05-07",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Whit Monday 2027 moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-01-17",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-05-18",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2027-01-17",
+            "to": "2027-01-17",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2027-01-17",
+            "to": "2027-01-18",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2027-01-17",
+            "to": "2027-05-17",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-05-17",
+            "to": "2027-05-18",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "Corpus Christi 2027 closes only Munich and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-01-27",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-05-28",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2027-01-27",
+            "to": "2027-01-27",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2027-01-27",
+            "to": "2027-01-28",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2027-01-27",
+            "to": "2027-05-27",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-05-27",
+            "to": "2027-05-28",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "All Saints' Day 2027 closes only Munich and still moves the date",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-07-01",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-11-02",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2027-07-01",
+            "to": "2027-07-01",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2027-07-01",
+            "to": "2027-07-02",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2027-07-01",
+            "to": "2027-11-01",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-11-01",
+            "to": "2027-11-02",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "23 December 2027 is the last open day before the closure",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-08-23",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-12-23",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2027-08-23",
+            "to": "2027-08-23",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2027-08-23",
+            "to": "2027-08-24",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2027-08-23",
+            "to": "2027-12-23",
+            "cite": "Rule 71(3) EPC; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-12-23",
+            "to": "2027-12-23",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "closure from 24 December 2027 continues into 2028, a year without a calendar",
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2027-08-24",
         "receivedAt": null
       },
       "expect": {

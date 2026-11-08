@@ -19,6 +19,8 @@ const MUTATIONS = [
   ['src/calendars/epo-2025.ts', "      ['2025-05-05', 'Liberation Day'],\n", '', 'calendar: one-office day dropped (2025)'],
   ['src/calendars/epo-2026.ts', "      ['2026-04-27', \"King's Day\"],\n", '', 'calendar: one-office day dropped (2026)'],
   ['src/calendars/epo-2026.ts', "      ['2026-01-01', \"New Year's Day\"],\n", '', 'calendar: New Year dropped'],
+  ['src/calendars/epo-2027.ts', "      ['2027-03-08', \"International Women's Day\"],\n", '', 'calendar: one-office day dropped (2027)'],
+  ['src/calendars/epo-2027.ts', "['2027-11-01', \"All Saints' Day\"]", "['2027-11-02', \"All Saints' Day\"]", 'calendar: wrong day (2027)'],
   ['src/calendars/epo-2025.ts', "['2025-12-29', 'Bridging day']", "['2025-12-22', 'Bridging day']", 'calendar: wrong day'],
   ['src/rules/ep-r71-3-grant-communication.v1.ts', 'const PERIOD_MONTHS = 4;', 'const PERIOD_MONTHS = 2;', 'R.71(3): wrong period'],
   ['src/rules/ep-r71-3-grant-communication.v1.ts', 'const DELIVERY_GRACE_DAYS = 7;', 'const DELIVERY_GRACE_DAYS = 10;', 'R.126(2): ten-day rule'],

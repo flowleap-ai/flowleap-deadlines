@@ -58,7 +58,7 @@ The library never guesses a date. It refuses with a named error:
 | Error | Cause |
 |---|---|
 | `invalid-input` | An input value is not a real date `YYYY-MM-DD`, not an event code `<OFFICE>:<code>`, or missing. `receivedAt` must be a date or `null`. |
-| `calendar-missing` | The computation needs a calendar year that is not loaded, for example a due date in 2027. |
+| `calendar-missing` | The computation needs a calendar year that is not loaded, for example a due date in 2028. |
 | `rule-not-effective` | The document date is before `effectiveFrom` or after `effectiveTo` of the rule version. |
 | `unknown-event` | The event code is not a trigger of the rule. |
 
@@ -80,6 +80,7 @@ Rule 134(1) EPC extends a period that ends on a day on which at least one EPO fi
 |---|---|---|
 | EPO 2025 | [OJ EPO 2024, A91](https://www.epo.org/en/legal/official-journal/2024/10/a91) | `src/calendars/epo-2025.ts` |
 | EPO 2026 | [OJ EPO 2025, A40](https://www.epo.org/en/legal/official-journal/2025/06/a40) | `src/calendars/epo-2026.ts` |
+| EPO 2027 | [OJ EPO 2026, A30](https://www.epo.org/en/legal/official-journal/2026/06/a30) | `src/calendars/epo-2027.ts` |
 
 The EPO closure from 24 December 2025 to 1 January 2026 is in these two calendars. A period that ends in it ends on 2 January 2026, as the [EPO notice of 11 December 2025](https://www.epo.org/en/service-support/website-updates/epo-offices-closed-24-december-2025-1-january-2026) states.
 
@@ -102,11 +103,15 @@ The cases of `ep.r71-3.grant-communication` version 1:
 | Receipt 11 days after the document date | 2025-03-03 | 2025-07-03, with a late-receipt note |
 | Receipt 7 days after the document date | 2025-03-03 | 2025-07-03, no note |
 | Document date before 1 November 2023 | 2023-10-31 | `rule-not-effective` |
-| Due date in 2027 | 2026-09-15 | `invalid-input` | An input value is not a real date `YYYY-MM-DD`, not an event code `<OFFICE>:<code>`, or missing. `receivedAt` must be a date or `null`. |
-| `calendar-missing` |
+| Due date in 2027 | 2026-09-15 | 2027-01-15 |
+| 24 December 2026, the closure continues into 2027 | 2026-08-24 | 2027-01-04 |
+| EP23771920, the R71(3) of the seed case `r71-3-en-open` | 2026-09-29 | 2027-01-29 |
+| Run of closed days: Good Friday to Easter Monday 2027 | 2026-11-26 | 2027-03-30 |
+| International Women's Day 2027 (Berlin only) | 2026-11-08 | 2027-03-09 |
+| 24 December 2027, the closure continues into 2028 | 2027-08-24 | `calendar-missing` |
 | Event `EPO:R161(1)` | 2025-03-03 | `unknown-event` |
 
-The file has more cases for closed document dates, runs of closed days, days on which only one filing office is closed, the month-end boundaries, the seven-day boundary of late receipt, receipt before the document date, and closures that continue into a year without a calendar. `test/oracle.test.mjs` compares the rule with an independent oracle for every document date from 2023-09-01 to 2027-03-31. `node scripts/mutation-check.mjs` applies likely bugs to `src/` one at a time and fails when the tests do not catch one.
+The file has more cases for closed document dates, runs of closed days, days on which only one filing office is closed, the month-end boundaries, the seven-day boundary of late receipt, receipt before the document date, and closures that continue into a year without a calendar. `test/oracle.test.mjs` compares the rule with an independent oracle for every document date from 2023-09-01 to 2027-12-31. `node scripts/mutation-check.mjs` applies likely bugs to `src/` one at a time and fails when the tests do not catch one.
 
 ## Add a rule version
 
@@ -134,7 +139,7 @@ npm test
 
 ## Sources
 
-The closing days and the legal citations come from the European Patent Office: the European Patent Convention, OJ EPO 2022, A101, OJ EPO 2023, A29, OJ EPO 2024, A91, OJ EPO 2025, A40, and the EPO notice of 11 December 2025, all on [epo.org](https://www.epo.org). Source: European Patent Office.
+The closing days and the legal citations come from the European Patent Office: the European Patent Convention, OJ EPO 2022, A101, OJ EPO 2023, A29, OJ EPO 2024, A91, OJ EPO 2025, A40, OJ EPO 2026, A30, and the EPO notice of 11 December 2025, all on [epo.org](https://www.epo.org). Source: European Patent Office.
 
 ## License
 
