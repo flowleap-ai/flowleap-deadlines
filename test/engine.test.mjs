@@ -159,3 +159,20 @@ test('compute refuses input that a JavaScript caller did not parse, and never gi
 test('a calendar of an unknown office is missing, never empty', () => {
   assert.throws(() => epoCalendars.calendar('USPTO', 2025), (error) => error instanceof CalendarMissing && error.office === 'USPTO');
 });
+
+test('a caller who changes rule.setPeriod does not change what compute accepts', () => {
+  const [rule] = rulesFor(parseEventCode('EPO:A94(3)'));
+  assert.throws(() => {
+    rule.setPeriod.maxMonths = 99;
+  }, TypeError);
+  const input = { event: parseEventCode('EPO:A94(3)'), documentDate: day('2026-06-09'), receivedAt: null, periodMonths: 8 };
+  assert.equal(rule.compute(input, epoCalendars).error, 'period-out-of-range');
+});
+
+test('defineRule refuses a setPeriod that is not a range of whole months from 1 up', () => {
+  const due = ({ documentDate }) => ({ due: documentDate, trace: [], notes: [], remedies: [] });
+  for (const [minMonths, maxMonths] of [[6, 2], [0, 4], [2.5, 4], [2, Number.NaN]]) {
+    assert.throws(() => defineRule({ ...window, due, setPeriod: { minMonths, maxMonths, cite: 'test' } }), RangeError, `${minMonths} to ${maxMonths}`);
+  }
+  assert.deepEqual(defineRule({ ...window, due, setPeriod: { minMonths: 1, maxMonths: 1, cite: 'test' } }).setPeriod, { minMonths: 1, maxMonths: 1, cite: 'test' });
+});

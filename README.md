@@ -58,7 +58,7 @@ Each trace step has `op`, `from`, `to` and `cite`:
 | `month-end` | The later month has no day with that number, so the period ends on the last day of that month. This step replaces `add-period`. | The rule of the period; Rule 131(4) EPC |
 | `closure-roll` | A period that ends on a closed day ends on the next day on which all filing offices are open. `from` and `to` are the same when the day is open. The citation names each calendar that the step read. | Rule 134(1) EPC; the OJ notice of each calendar |
 
-The library computes the earliest safe date. When a law gives a later date that depends on a fact that the library cannot prove, the library gives a note and does not change the date. In version 1 this is the late receipt of Rule 126(2) and Rule 127(2) EPC: when `receivedAt` is more than seven days after the document date, the note gives the number of extra days and the later date before Rule 134(1) EPC. The extra days count from the end of the period before Rule 134(1) EPC, not from the due date after the closure roll (Guidelines E-II, 2.3). A `receivedAt` before the document date changes nothing: the date that the document bears is the deemed receipt (OJ EPO 2023, A29, section II).
+The library computes the earliest safe date. When a law gives a later date that depends on a fact that the library cannot prove, the library gives a note and does not change the date. In version 1 of each rule this is the late receipt of Rule 126(2) and Rule 127(2) EPC: when `receivedAt` is more than seven days after the document date, the note gives the number of extra days and the later date before Rule 134(1) EPC. The extra days count from the end of the period before Rule 134(1) EPC, not from the due date after the closure roll (Guidelines E-II, 2.3). A `receivedAt` before the document date changes nothing: the date that the document bears is the deemed receipt (OJ EPO 2023, A29, section II).
 
 ## Fail loud
 
@@ -66,7 +66,7 @@ The library never guesses a date. It refuses with a named error:
 
 | Error | Cause |
 |---|---|
-| `invalid-input` | An input value is not a real date `YYYY-MM-DD`, not an event code `<OFFICE>:<code>`, or missing. `receivedAt` must be a date or `null`. For a rule with `setPeriod`, `periodMonths` is not a whole number. |
+| `invalid-input` | An input value is not a real date `YYYY-MM-DD`, not an event code `<OFFICE>:<code>`, or missing. `receivedAt` must be a date or `null`. For a rule with `setPeriod`, `periodMonths` is not a whole number; `compute` checks `periodMonths` after the event and the effective dates, so a wrong event or an early document date gives those errors first. |
 | `period-missing` | The rule has `setPeriod` and the input has no `periodMonths`, or it is `null`. |
 | `period-out-of-range` | `periodMonths` is outside `setPeriod` of the rule, for example 1 or 7 months for an Art. 94(3) communication (Rule 132(2) EPC). |
 | `calendar-missing` | The computation needs a calendar year that is not loaded, for example a due date in 2028. |
