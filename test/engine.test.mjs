@@ -62,7 +62,40 @@ test('rulesFor gives the rule versions that an event triggers, and none for an u
   assert.deepEqual(rulesFor(parseEventCode('EPO:R71(3)')).map((rule) => `${rule.id} v${rule.version}`), [
     'ep.r71-3.grant-communication v1',
   ]);
+  assert.deepEqual(rulesFor(parseEventCode('EPO:A94(3)')).map((rule) => `${rule.id} v${rule.version}`), [
+    'ep.a94-3.examination-communication v1',
+  ]);
   assert.deepEqual(rulesFor(parseEventCode('EPO:R161(1)')), []);
+});
+
+test('a rule tells whether the office sets its period and in which range', () => {
+  assert.deepEqual(
+    rules.map((rule) => [rule.id, rule.setPeriod]),
+    [
+      ['ep.r71-3.grant-communication', null],
+      ['ep.a94-3.examination-communication', { minMonths: 2, maxMonths: 6, cite: 'Rule 132(2) EPC' }],
+    ],
+  );
+});
+
+test('a rule whose period the law fixes ignores periodMonths, as before the field existed', () => {
+  const [rule] = rulesFor(parseEventCode('EPO:R71(3)'));
+  const input = { event: parseEventCode('EPO:R71(3)'), documentDate: day('2025-03-03'), receivedAt: null };
+  const before = rule.compute(input, epoCalendars);
+  for (const periodMonths of [2, 7, 4.5, '4', null]) assert.deepEqual(rule.compute({ ...input, periodMonths }, epoCalendars), before);
+});
+
+test('the Art. 94(3) rule refuses a period that a JavaScript caller did not check, and names the period in the detail', () => {
+  const [rule] = rulesFor(parseEventCode('EPO:A94(3)'));
+  const at = (periodMonths) => rule.compute({ event: 'EPO:A94(3)', documentDate: '2026-06-09', receivedAt: null, periodMonths }, epoCalendars);
+  for (const periodMonths of [Number.NaN, Infinity, '4', [4], 2.0000001]) {
+    assert.equal(at(periodMonths).error, 'invalid-input', String(periodMonths));
+    assert.match(at(periodMonths).detail, /^periodMonths: not a whole number of months: /);
+  }
+  assert.match(at(undefined).detail, /needs periodMonths.*Rule 132\(2\) EPC: 2 to 6 months/);
+  assert.match(at(-4).detail, /a period of -4 months is outside Rule 132\(2\) EPC, which allows 2 to 6 months/);
+  assert.equal(at(2).due, '2026-08-10');
+  assert.equal(at(6).due, '2026-12-09');
 });
 
 test('no rule version has an attorney sign-off yet', () => {
