@@ -1,0 +1,1137 @@
+{
+  "rule": "ep.a94-3.examination-communication",
+  "version": 1,
+  "cases": [
+    {
+      "name": "EP23755468: Art. 94(3) of 9 June 2026 sets 4 months and ends on 9 October 2026, an open Friday",
+      "derivation": [
+        "The letter (EPO Form 2001, EP23755468, seed firm row 16, public in the EP Register) bears 09.06.2026 and sets \"a period of 4 months\".",
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-06-09. R.131(2) EPC: computation starts on 2026-06-10.",
+        "R.131(4) EPC: 4 months after 9 June 2026 is 9 October 2026.",
+        "R.134(1) EPC: 9 October 2026 is a Friday and OJ EPO 2025, A40 lists no closing day on it. The period ends on 9 October 2026."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-10-09",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-06-09",
+            "to": "2026-06-09",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-06-09",
+            "to": "2026-06-10",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-06-09",
+            "to": "2026-10-09",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-10-09",
+            "to": "2026-10-09",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "EP24166597: Art. 94(3) of 18 September 2026 sets 4 months and ends on 18 January 2027, an open Monday",
+      "derivation": [
+        "The letter (EPA Form 2001, EP24166597, seed firm row 6, public in the EP Register) bears 18.09.2026 and sets \"einer Frist von 4 Monaten\".",
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-09-18. R.131(2) EPC: computation starts on 2026-09-19.",
+        "R.131(4) EPC: 4 months after 18 September 2026 is 18 January 2027.",
+        "R.134(1) EPC: 18 January 2027 is a Monday and OJ EPO 2026, A30 lists no closing day on it."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-09-18",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-01-18",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-09-18",
+            "to": "2026-09-18",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-09-18",
+            "to": "2026-09-19",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-09-18",
+            "to": "2027-01-18",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-01-18",
+            "to": "2027-01-18",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "two months (Guidelines E-VIII, 1.2 (i)): 15 July 2025 to 15 September 2025, an open Monday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-07-15. R.131(2) EPC: computation starts on 2025-07-16.",
+        "R.131(4) EPC: 2 months after 15 July 2025 is 15 September 2025.",
+        "R.134(1) EPC: 15 September 2025 is a Monday and OJ EPO 2024, A91 lists no closing day on it."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-07-15",
+        "receivedAt": null,
+        "periodMonths": 2
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-09-15",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-07-15",
+            "to": "2025-07-15",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-07-15",
+            "to": "2025-07-16",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-07-15",
+            "to": "2025-09-15",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 2 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-09-15",
+            "to": "2025-09-15",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "three months, inside the range of Rule 132(2) EPC: 15 July 2025 to 15 October 2025, an open Wednesday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-07-15. R.131(2) EPC: computation starts on 2025-07-16.",
+        "R.132(2) EPC allows two to four months; three months is in the range.",
+        "R.131(4) EPC: 3 months after 15 July 2025 is 15 October 2025, a Wednesday with no closing day."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-07-15",
+        "receivedAt": null,
+        "periodMonths": 3
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-10-15",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-07-15",
+            "to": "2025-07-15",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-07-15",
+            "to": "2025-07-16",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-07-15",
+            "to": "2025-10-15",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 3 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-10-15",
+            "to": "2025-10-15",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "five months, inside the range of Rule 132(2) EPC: 15 July 2025 to 15 December 2025, an open Monday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-07-15. R.131(2) EPC: computation starts on 2025-07-16.",
+        "R.132(2) EPC allows up to six months in certain circumstances; five months is in the range.",
+        "R.131(4) EPC: 5 months after 15 July 2025 is 15 December 2025, a Monday. The closure of OJ EPO 2024, A91 starts on 24 December 2025."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-07-15",
+        "receivedAt": null,
+        "periodMonths": 5
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-12-15",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-07-15",
+            "to": "2025-07-15",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-07-15",
+            "to": "2025-07-16",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-07-15",
+            "to": "2025-12-15",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 5 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-12-15",
+            "to": "2025-12-15",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "six months (Guidelines E-VIII, 1.2, exceptional cases): 30 September 2025 to 30 March 2026, an open Monday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-09-30. R.131(2) EPC: computation starts on 2025-10-01.",
+        "R.131(4) EPC: 6 months after 30 September 2025 is 30 March 2026. March has a day 30.",
+        "R.134(1) EPC: 30 March 2026 is a Monday and OJ EPO 2025, A40 lists no closing day on it."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-09-30",
+        "receivedAt": null,
+        "periodMonths": 6
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-03-30",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-09-30",
+            "to": "2025-09-30",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-09-30",
+            "to": "2025-10-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-09-30",
+            "to": "2026-03-30",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 6 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-03-30",
+            "to": "2026-03-30",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "month end: 31 May 2026 plus 4 months; September has no day 31, so 30 September 2026, an open Wednesday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-05-31. R.131(2) EPC: computation starts on 2026-06-01.",
+        "R.131(4) EPC: the later month, September 2026, has no day 31, so the period ends on its last day, 30 September 2026.",
+        "R.134(1) EPC: 30 September 2026 is a Wednesday with no closing day."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-05-31",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-09-30",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-05-31",
+            "to": "2026-05-31",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-05-31",
+            "to": "2026-06-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "month-end",
+            "from": "2026-05-31",
+            "to": "2026-09-30",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC, last day of the month"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-09-30",
+            "to": "2026-09-30",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "month end: 31 October 2025 plus 4 months; 28 February 2026 is a Saturday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-10-31. R.131(2) EPC: computation starts on 2025-11-01.",
+        "R.131(4) EPC: February 2026 has no day 31, so the period ends on 28 February 2026.",
+        "R.134(1) EPC: 28 February 2026 is a Saturday and 1 March 2026 a Sunday. Monday 2 March 2026 is open."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-10-31",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-03-02",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-10-31",
+            "to": "2025-10-31",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-10-31",
+            "to": "2025-11-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "month-end",
+            "from": "2025-10-31",
+            "to": "2026-02-28",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC, last day of the month"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-02-28",
+            "to": "2026-03-02",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "month end with two months: 31 December 2025 plus 2 months; 28 February 2026 is a Saturday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-12-31. R.131(2) EPC: computation starts on 2026-01-01.",
+        "R.131(4) EPC: February 2026 has no day 31, so the period ends on 28 February 2026.",
+        "R.134(1) EPC: Saturday 28 February and Sunday 1 March 2026 are closed. Monday 2 March 2026 is open."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-12-31",
+        "receivedAt": null,
+        "periodMonths": 2
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-03-02",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-12-31",
+            "to": "2025-12-31",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-12-31",
+            "to": "2026-01-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "month-end",
+            "from": "2025-12-31",
+            "to": "2026-02-28",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 2 months set in the communication; Rule 131(4) EPC, last day of the month"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-02-28",
+            "to": "2026-03-02",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "month end with six months: 31 August 2026 plus 6 months; 28 February 2027 is a Sunday",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-08-31. R.131(2) EPC: computation starts on 2026-09-01.",
+        "R.131(4) EPC: February 2027 has no day 31, so the period ends on 28 February 2027.",
+        "R.134(1) EPC: 28 February 2027 is a Sunday. Monday 1 March 2027 is open (OJ EPO 2026, A30 closes 8 March, not 1 March)."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-08-31",
+        "receivedAt": null,
+        "periodMonths": 6
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-03-01",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-08-31",
+            "to": "2026-08-31",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-08-31",
+            "to": "2026-09-01",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "month-end",
+            "from": "2026-08-31",
+            "to": "2027-02-28",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 6 months set in the communication; Rule 131(4) EPC, last day of the month"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-02-28",
+            "to": "2027-03-01",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "expiry on a Saturday: 10 June 2026 plus 4 months is Saturday 10 October 2026",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-06-10. R.131(2) EPC: computation starts on 2026-06-11.",
+        "R.131(4) EPC: 4 months after 10 June 2026 is 10 October 2026, a Saturday.",
+        "R.134(1) EPC: Saturday and Sunday are closed. Monday 12 October 2026 is open."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-10",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-10-12",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-06-10",
+            "to": "2026-06-10",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-06-10",
+            "to": "2026-06-11",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-06-10",
+            "to": "2026-10-10",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-10-10",
+            "to": "2026-10-12",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "expiry on a Sunday: 11 June 2026 plus 4 months is Sunday 11 October 2026",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-06-11. R.131(2) EPC: computation starts on 2026-06-12.",
+        "R.131(4) EPC: 4 months after 11 June 2026 is 11 October 2026, a Sunday.",
+        "R.134(1) EPC: Monday 12 October 2026 is open."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-11",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-10-12",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-06-11",
+            "to": "2026-06-11",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-06-11",
+            "to": "2026-06-12",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-06-11",
+            "to": "2026-10-11",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-10-11",
+            "to": "2026-10-12",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "expiry on an EPO closing day: Ascension Day, Thursday 14 May 2026",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-01-14. R.131(2) EPC: computation starts on 2026-01-15.",
+        "R.131(4) EPC: 4 months after 14 January 2026 is 14 May 2026.",
+        "R.134(1) EPC: OJ EPO 2025, A40 closes all filing offices on Ascension Day, 14 May 2026. Friday 15 May 2026 is open."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-01-14",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-05-15",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-01-14",
+            "to": "2026-01-14",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-01-14",
+            "to": "2026-01-15",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-01-14",
+            "to": "2026-05-14",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-05-14",
+            "to": "2026-05-15",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "expiry on a day that closes only The Hague: Liberation Day, Monday 5 May 2025, with two months",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-03-05. R.131(2) EPC: computation starts on 2025-03-06.",
+        "R.131(4) EPC: 2 months after 5 March 2025 is 5 May 2025.",
+        "R.134(1) EPC: the period extends to the first day on which all filing offices are open. OJ EPO 2024, A91 closes The Hague on 5 May 2025. Tuesday 6 May 2025 is open."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-03-05",
+        "receivedAt": null,
+        "periodMonths": 2
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-05-06",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-03-05",
+            "to": "2025-03-05",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-03-05",
+            "to": "2025-03-06",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-03-05",
+            "to": "2025-05-05",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 2 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-05-05",
+            "to": "2025-05-06",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "run of closed days with two months: Good Friday to Easter Monday 2027",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2027-01-26. R.131(2) EPC: computation starts on 2027-01-27.",
+        "R.131(4) EPC: 2 months after 26 January 2027 is 26 March 2027, Good Friday.",
+        "R.134(1) EPC: 26 March (Good Friday), 27 and 28 March (weekend) and 29 March 2027 (Easter Monday) are closed (OJ EPO 2026, A30). Tuesday 30 March 2027 is open."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2027-01-26",
+        "receivedAt": null,
+        "periodMonths": 2
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-03-30",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2027-01-26",
+            "to": "2027-01-26",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2027-01-26",
+            "to": "2027-01-27",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2027-01-26",
+            "to": "2027-03-26",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 2 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2027-03-26",
+            "to": "2027-03-30",
+            "cite": "Rule 134(1) EPC; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "six months into the year-end closure: 24 December 2026 moves to 4 January 2027",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-06-24. R.131(2) EPC: computation starts on 2026-06-25.",
+        "R.131(4) EPC: 6 months after 24 June 2026 is 24 December 2026.",
+        "R.134(1) EPC: OJ EPO 2025, A40 closes 24, 25 and 28 to 31 December 2026; 26 and 27 December are a weekend. OJ EPO 2026, A30 closes 1 January 2027; 2 and 3 January are a weekend. Monday 4 January 2027 is open. The step reads both calendars."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-24",
+        "receivedAt": null,
+        "periodMonths": 6
+      },
+      "expect": {
+        "ok": true,
+        "due": "2027-01-04",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-06-24",
+            "to": "2026-06-24",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-06-24",
+            "to": "2026-06-25",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-06-24",
+            "to": "2026-12-24",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 6 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-12-24",
+            "to": "2027-01-04",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40; OJ EPO 2026, A30"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "late receipt: the EP23755468 letter received 11 days after its date gives a note of 4 days and no change of the due date",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-06-09. R.131(2) EPC: computation starts on 2026-06-10.",
+        "R.131(4) EPC: 4 months after 9 June 2026 is 9 October 2026, an open Friday.",
+        "R.126(2) and R.127(2) EPC: only if the EPO establishes receipt more than seven days after the date, the period ends later by the days beyond seven: 11 - 7 = 4 days, 9 October + 4 days = 13 October 2026.",
+        "The library cannot prove that fact, so the due date stays 9 October 2026 and the later date is a note, as in ep.r71-3.grant-communication v1."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": "2026-06-20",
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-10-09",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-06-09",
+            "to": "2026-06-09",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-06-09",
+            "to": "2026-06-10",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-06-09",
+            "to": "2026-10-09",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-10-09",
+            "to": "2026-10-09",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [
+          {
+            "kind": "late-receipt",
+            "text": "The document reached the addressee on 2026-06-20, 11 days after the date it bears. If the EPO establishes this, the period ends 4 days after 2026-10-09, on 2026-10-13, and Rule 134(1) EPC then applies to that day. The due date does not include this extension.",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC"
+          }
+        ],
+        "remedies": []
+      }
+    },
+    {
+      "name": "receipt seven days after the document date gives no note",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-06-09. R.131(2) EPC: computation starts on 2026-06-10.",
+        "R.126(2) and R.127(2) EPC: receipt 7 days after the date is not more than seven days, so the period does not change and there is no note."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": "2026-06-16",
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-10-09",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-06-09",
+            "to": "2026-06-09",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-06-09",
+            "to": "2026-06-10",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-06-09",
+            "to": "2026-10-09",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-10-09",
+            "to": "2026-10-09",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [],
+        "remedies": []
+      }
+    },
+    {
+      "name": "receipt eight days after the document date gives a note of one day, with two months",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2025-07-15. R.131(2) EPC: computation starts on 2025-07-16.",
+        "R.131(4) EPC: 2 months after 15 July 2025 is 15 September 2025, an open Monday.",
+        "R.126(2) and R.127(2) EPC: 8 - 7 = 1 day; 15 September + 1 day = 16 September 2025."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2025-07-15",
+        "receivedAt": "2025-07-23",
+        "periodMonths": 2
+      },
+      "expect": {
+        "ok": true,
+        "due": "2025-09-15",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2025-07-15",
+            "to": "2025-07-15",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2025-07-15",
+            "to": "2025-07-16",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2025-07-15",
+            "to": "2025-09-15",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 2 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2025-09-15",
+            "to": "2025-09-15",
+            "cite": "Rule 134(1) EPC; OJ EPO 2024, A91"
+          }
+        ],
+        "notes": [
+          {
+            "kind": "late-receipt",
+            "text": "The document reached the addressee on 2025-07-23, 8 days after the date it bears. If the EPO establishes this, the period ends 1 day after 2025-09-15, on 2025-09-16, and Rule 134(1) EPC then applies to that day. The due date does not include this extension.",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC"
+          }
+        ],
+        "remedies": []
+      }
+    },
+    {
+      "name": "late receipt when the plain date is a Saturday: the extra days count from the Saturday, then Rule 134(1) EPC applies",
+      "derivation": [
+        "R.126(2) and R.127(2) EPC: the document is deemed delivered on the date it bears, 2026-06-10. R.131(2) EPC: computation starts on 2026-06-11.",
+        "R.131(4) EPC: 4 months after 10 June 2026 is Saturday 10 October 2026. R.134(1) EPC: the due date is Monday 12 October 2026.",
+        "Guidelines E-II, 2.3: Rule 134(1) applies only once the period has been extended under the seven-day safeguard. Receipt on 20 June 2026 is 10 days late: 10 - 7 = 3 days after 10 October is 13 October 2026."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-10",
+        "receivedAt": "2026-06-20",
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": true,
+        "due": "2026-10-12",
+        "trace": [
+          {
+            "op": "delivery",
+            "from": "2026-06-10",
+            "to": "2026-06-10",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC; OJ EPO 2023, A29"
+          },
+          {
+            "op": "start",
+            "from": "2026-06-10",
+            "to": "2026-06-11",
+            "cite": "Rule 131(2) EPC"
+          },
+          {
+            "op": "add-period",
+            "from": "2026-06-10",
+            "to": "2026-10-10",
+            "cite": "Article 94(3) EPC; Rule 71(1) EPC; Rule 132(2) EPC, 4 months set in the communication; Rule 131(4) EPC"
+          },
+          {
+            "op": "closure-roll",
+            "from": "2026-10-10",
+            "to": "2026-10-12",
+            "cite": "Rule 134(1) EPC; OJ EPO 2025, A40"
+          }
+        ],
+        "notes": [
+          {
+            "kind": "late-receipt",
+            "text": "The document reached the addressee on 2026-06-20, 10 days after the date it bears. If the EPO establishes this, the period ends 3 days after 2026-10-10, on 2026-10-13, and Rule 134(1) EPC then applies to that day. The due date does not include this extension.",
+            "cite": "Rule 126(2) EPC; Rule 127(2) EPC"
+          }
+        ],
+        "remedies": []
+      }
+    },
+    {
+      "name": "refusal: no period in the input",
+      "derivation": [
+        "R.71(1) EPC: the period is \"a period to be specified\" in the communication. The law gives no default, so the engine computes no date."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "period-missing"
+      }
+    },
+    {
+      "name": "refusal: a period of null",
+      "derivation": [
+        "A JavaScript or JSON caller can send null. It is the same as no period."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": null
+      },
+      "expect": {
+        "ok": false,
+        "error": "period-missing"
+      }
+    },
+    {
+      "name": "refusal: a period of one month",
+      "derivation": [
+        "R.132(2) EPC: a period that the EPO specifies is not less than two months. R.71(1) EPC provides nothing else."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": 1
+      },
+      "expect": {
+        "ok": false,
+        "error": "period-out-of-range"
+      }
+    },
+    {
+      "name": "refusal: a period of zero months",
+      "derivation": [
+        "R.132(2) EPC: not less than two months."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": 0
+      },
+      "expect": {
+        "ok": false,
+        "error": "period-out-of-range"
+      }
+    },
+    {
+      "name": "refusal: a period of seven months",
+      "derivation": [
+        "R.132(2) EPC: not more than four months, in certain circumstances up to six months. Seven months is outside the range."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": 7
+      },
+      "expect": {
+        "ok": false,
+        "error": "period-out-of-range"
+      }
+    },
+    {
+      "name": "refusal: a period that is not a whole number of months",
+      "derivation": [
+        "R.131(1) EPC lays down periods in full years, months, weeks or days. 4.5 months is not a period in full months."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": 4.5
+      },
+      "expect": {
+        "ok": false,
+        "error": "invalid-input"
+      }
+    },
+    {
+      "name": "refusal: a period given as text",
+      "derivation": [
+        "The input must be a number of months. The text \"4\" is not parsed."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": "4"
+      },
+      "expect": {
+        "ok": false,
+        "error": "invalid-input"
+      }
+    },
+    {
+      "name": "refusal: document date before effectiveFrom",
+      "derivation": [
+        "The rule applies from 2023-11-01, when the new R.126(2) and R.127(2) EPC apply (CA/D 10/22, OJ EPO 2022, A101). A document of 31 October 2023 is under the old ten-day rule."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2023-10-31",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": false,
+        "error": "rule-not-effective"
+      }
+    },
+    {
+      "name": "refusal: the first document date of the rule version needs the 2024 calendar, which is not loaded",
+      "derivation": [
+        "R.131(4) EPC: 2 months after 1 November 2023 is 1 January 2024. R.134(1) EPC needs the 2024 calendar, which the library does not load."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2023-11-01",
+        "receivedAt": null,
+        "periodMonths": 2
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "refusal: due date in 2028, a year with no calendar",
+      "derivation": [
+        "R.131(4) EPC: 4 months after 15 September 2027 is 15 January 2028. R.134(1) EPC needs the 2028 calendar, which the library does not load."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2027-09-15",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "refusal: the closure from 24 December 2027 continues into 2028, a year with no calendar",
+      "derivation": [
+        "R.131(4) EPC: 4 months after 24 August 2027 is 24 December 2027, closed (OJ EPO 2026, A30). The closure runs to 31 December 2027, and 1 January 2028 needs the 2028 calendar."
+      ],
+      "input": {
+        "event": "EPO:A94(3)",
+        "documentDate": "2027-08-24",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": false,
+        "error": "calendar-missing"
+      }
+    },
+    {
+      "name": "refusal: event EPO:R71(3) does not trigger the rule",
+      "derivation": [
+        "The rule triggers only on EPO:A94(3)."
+      ],
+      "input": {
+        "event": "EPO:R71(3)",
+        "documentDate": "2026-06-09",
+        "receivedAt": null,
+        "periodMonths": 4
+      },
+      "expect": {
+        "ok": false,
+        "error": "unknown-event"
+      }
+    }
+  ]
+}

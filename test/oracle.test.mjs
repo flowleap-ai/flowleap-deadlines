@@ -115,11 +115,11 @@ function oracleClosed(date) {
   return zeller(date) <= 1 || closedByNotice.has(fmt(date));
 }
 
-/** Rule 71(3), Rule 126(2)/127(2), Rule 131(2) and (4), Rule 134(1) EPC, from the text. */
-function oracle(documentDate) {
+/** A period of `months` from the deemed delivery: Rule 126(2)/127(2), Rule 131(2) and (4), Rule 134(1) EPC, from the text. */
+function oracle(documentDate, months) {
   if (documentDate < '2023-11-01') return { error: 'rule-not-effective' };
   const doc = parse(documentDate);
-  const m0 = doc.m + 4;
+  const m0 = doc.m + months;
   const y = doc.y + Math.floor((m0 - 1) / 12);
   const m = ((m0 - 1) % 12) + 1;
   const plain = { y, m, d: Math.min(doc.d, monthLength(y, m)) };
@@ -142,7 +142,7 @@ const rule = rules.find((r) => r.id === 'ep.r71-3.grant-communication' && r.vers
 const event = parseEventCode('EPO:R71(3)');
 
 test('the oracle agrees with OJ EPO 2023, A29, example 1: 13 November 2023 plus four months is 13 March 2024', () => {
-  assert.equal(oracle('2023-11-13').error, 'calendar-missing');
+  assert.equal(oracle('2023-11-13', 4).error, 'calendar-missing');
   assert.equal(fmt(parse('2024-03-13')), '2024-03-13');
   assert.equal(zeller(parse('2024-03-13')), 4); // Wednesday, an open day
 });
@@ -185,7 +185,7 @@ test('the engine agrees with the oracle for every document date from 2023-09-01 
   const counts = { due: 0, 'calendar-missing': 0, 'rule-not-effective': 0 };
   for (let day = parse('2023-09-01'); fmt(day) <= '2027-12-31'; day = next(day)) {
     const documentDate = fmt(day);
-    const expected = oracle(documentDate);
+    const expected = oracle(documentDate, 4);
     const got = rule.compute({ event, documentDate: parseLocalDate(documentDate), receivedAt: null }, epoCalendars);
     if (expected.error !== undefined) {
       assert.equal(got.ok, false, documentDate);
@@ -223,7 +223,7 @@ test('a document date on the 28th to 31st of each month of 2024 to 2027 ends on 
       for (const d of [28, 29, 30, 31]) {
         if (d > monthLength(year, month)) continue;
         const documentDate = `${year}-${pad(month)}-${pad(d)}`;
-        const expected = oracle(documentDate);
+        const expected = oracle(documentDate, 4);
         if (expected.error !== undefined) continue;
         const got = rule.compute({ event, documentDate: parseLocalDate(documentDate), receivedAt: null }, epoCalendars);
         assert.equal(got.trace[2].to, expected.plain, documentDate);
@@ -231,4 +231,31 @@ test('a document date on the 28th to 31st of each month of 2024 to 2027 ends on 
       }
     }
   }
+});
+
+const a94 = rules.find((r) => r.id === 'ep.a94-3.examination-communication' && r.version === 1);
+const a94Event = parseEventCode('EPO:A94(3)');
+
+test('the Art. 94(3) rule agrees with the oracle for every document date from 2023-09-01 to 2027-12-31 and every period of 2 to 6 months', () => {
+  let checked = 0;
+  for (let months = 2; months <= 6; months++) {
+    for (let day = parse('2023-09-01'); fmt(day) <= '2027-12-31'; day = next(day)) {
+      const documentDate = fmt(day);
+      const expected = oracle(documentDate, months);
+      const got = a94.compute({ event: a94Event, documentDate: parseLocalDate(documentDate), receivedAt: null, periodMonths: months }, epoCalendars);
+      const where = `${documentDate} + ${months} months`;
+      checked++;
+      if (expected.error !== undefined) {
+        assert.equal(got.error, expected.error, where);
+        continue;
+      }
+      assert.equal(got.due, expected.due, where);
+      const [, , period, roll] = got.trace;
+      assert.equal(period.op, expected.monthEnd ? 'month-end' : 'add-period', where);
+      assert.deepEqual([period.to, roll.from, roll.to], [expected.plain, expected.plain, expected.due], where);
+      assert.match(period.cite, new RegExp(`Rule 132\\(2\\) EPC, ${months} months set in the communication`), where);
+      assert.equal(roll.cite, ['Rule 134(1) EPC', ...expected.years.map((y) => NOTICES[y].cite)].join('; '), where);
+    }
+  }
+  assert.equal(checked, 5 * 1583);
 });

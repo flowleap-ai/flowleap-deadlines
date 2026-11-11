@@ -22,6 +22,7 @@ for (const file of files) {
           event: parseEventCode(input.event),
           documentDate: parseLocalDate(input.documentDate),
           receivedAt: input.receivedAt === null ? null : parseLocalDate(input.receivedAt),
+          periodMonths: input.periodMonths,
         },
         epoCalendars,
       );

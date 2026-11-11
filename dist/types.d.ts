@@ -19,6 +19,11 @@ export type TriggerInput = {
     readonly documentDate: LocalDate;
     /** The date on which the document reached the addressee, when known. */
     readonly receivedAt: LocalDate | null;
+    /**
+     * The period in whole months that the office document sets. Only a rule with `setPeriod` reads it,
+     * and refuses the trigger without it. A rule whose period the law fixes ignores it.
+     */
+    readonly periodMonths?: number;
 };
 export type TraceStep = {
     readonly op: 'delivery' | 'start' | 'add-period' | 'month-end' | 'closure-roll';
@@ -31,7 +36,13 @@ export type Note = {
     readonly text: string;
     readonly cite: string;
 };
-export type ComputationError = 'invalid-input' | 'calendar-missing' | 'unknown-event' | 'rule-not-effective';
+export type ComputationError = 'invalid-input' | 'calendar-missing' | 'unknown-event' | 'rule-not-effective' | 'period-missing' | 'period-out-of-range';
+/** The whole months, ends included, that the law allows for a period that the office sets in the document. */
+export type SetPeriod = {
+    readonly minMonths: number;
+    readonly maxMonths: number;
+    readonly cite: string;
+};
 export type Computation = {
     readonly ok: true;
     readonly due: LocalDate;
@@ -53,6 +64,8 @@ export type Rule = {
     readonly effectiveTo: LocalDate | null;
     readonly office: OfficeCode;
     readonly trigger: readonly EventCode[];
+    /** The allowed range of `periodMonths` when the office sets the period; `null` when the law fixes it. */
+    readonly setPeriod: SetPeriod | null;
     /** `null` until a qualified attorney signs off this version. */
     readonly reviewedBy: {
         readonly attorney: string;
